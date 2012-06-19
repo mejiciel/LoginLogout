@@ -4,6 +4,7 @@ public class User {
 	
 	private String name;
 	private String password;
+	private String confirmpassword;
 	public String getName() {
 		return name;
 	}
@@ -16,4 +17,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getConfirmpassword() {
+		return confirmpassword;
+	}
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
+	}
+	
 }

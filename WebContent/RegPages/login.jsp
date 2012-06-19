@@ -6,12 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
+<s:head/>
 </head>
 <body>
-<s:form action="UserLogin" >
-<s:textfield name="user.name" label="Name" />
+
+<s:form action="UserLogin" cssStyle="width:400px" >
+<s:textfield  name="user.name"  label="Name" />
+
 <s:password name="user.password" label="Password"/>
+
 <s:submit value="Login"/>
 </s:form>
+<a href="<s:url action='UserForget'/>">Already have an account?</a>
+<a href="UserReg.jsp">Create a new account</a>
 </body>
 </html>
