@@ -13,5 +13,8 @@
 	<result name="forget">result.jsp</result>
 	</action>
 	
+	<action name="CreateUser" method="createuser" class="com.meji.UserManager.UserManageAction">
+	<result name="success">result.jsp</result>
+	</action>
 	</package>
 </struts>

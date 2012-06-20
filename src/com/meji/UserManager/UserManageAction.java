@@ -1,8 +1,9 @@
 package com.meji.UserManager;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 
-public class UserManageAction extends ActionSupport {
+public class UserManageAction extends ActionSupport implements ModelDriven<User> {
 	private User user=new User();
 	private String resultMessage;
 	public User getUser() {
@@ -22,6 +23,10 @@ public class UserManageAction extends ActionSupport {
 	public String Create() throws Exception{
 		setResultMessage("Create Success");
 		return "result";
+	}
+	public String createuser() throws Exception{
+		setResultMessage(user.getName()+" "+user.getPassword());
+		return super.execute();
 	}
 	
 	public String Login() throws Exception{
@@ -43,5 +48,11 @@ public class UserManageAction extends ActionSupport {
 
 	public void setResultMessage(String resultMessage) {
 		this.resultMessage = resultMessage;
+	}
+
+	@Override
+	public User getModel() {
+		// TODO Auto-generated method stub
+		return user;
 	}
 }

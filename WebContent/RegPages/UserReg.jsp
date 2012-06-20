@@ -19,12 +19,13 @@ function validatePassword()
 <s:head/>
 </head>
 <body>
-<s:form validate="true"  method="POST" >
-<s:textfield name="userName" label="Name" />
+
+<s:form validate="true" action="CreateUser.action" method="POST"  >
+<s:textfield name="name" label="Name" />
 <s:password name="password" label="Password" id="password" /><img id="validateicon" src="image/check.gif"/>
 <s:password name="confirmpassword" label="Confirm" id="confirm_password" />
 
-<s:submit value="Create User" action="UserCreate"/>
+<s:submit value="Create User"/>
 </s:form>
 </body>
 </html>
