@@ -22,6 +22,7 @@ function validatePassword()
 
 <s:form validate="true" action="CreateUser.action" method="POST"  >
 <s:textfield name="name" label="Name" />
+<s:textfield name="email" label="Email"/>
 <s:password name="password" label="Password" id="password" /><img id="validateicon" src="image/check.gif"/>
 <s:password name="confirmpassword" label="Confirm" id="confirm_password" />
 

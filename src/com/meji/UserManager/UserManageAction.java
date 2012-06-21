@@ -1,10 +1,15 @@
 package com.meji.UserManager;
 
+import java.util.Enumeration;
+import java.util.Hashtable;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class UserManageAction extends ActionSupport implements ModelDriven<User> {
 	private User user=new User();
+	private static Hashtable<String,User> existingUser=new Hashtable<String,User>();
+	
 	private String resultMessage;
 	public User getUser() {
 		return user;
@@ -25,20 +30,51 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		return "result";
 	}
 	public String createuser() throws Exception{
-		setResultMessage(user.getName()+" "+user.getPassword());
-		return super.execute();
+		if(!existingUser.containsKey(user.getName()))
+		{
+			User t=(User) user.clone();
+			existingUser.put(t.getName(),t);
+			setResultMessage(user.getName()+" "+user.getPassword()+" "+user.getEmail());
+			return super.execute();
+		}
+		else
+		{
+			setResultMessage("User Existed");
+			return super.execute();
+		}
+		
 	}
 	
 	public String Login() throws Exception{
-		if(user.getName().equals("meji") && user.getPassword().equals("123456")) 
+		if(existingUser.containsKey(user.getName()) &&
+				user.getPassword().equals(existingUser.get(user.getName()).getPassword()))
+		{
+			
 			setResultMessage("Login Success");
+				
+		}
 		else
 			setResultMessage("Login Failed");
 		return "result";
+		
 	}
 	
 	public String Forget() throws Exception{
-		setResultMessage("Recover Success");
+		
+		Enumeration<User> userEnum=existingUser.elements();
+		while(userEnum.hasMoreElements())
+		{
+			User t=userEnum.nextElement();
+			if(t.getEmail().equals(user.getEmail()))
+			{
+				setResultMessage("Your password is "+t.getPassword());
+				return "result";
+			}
+				
+				
+		}
+		
+		setResultMessage("Your email is not registered.");
 		return "result";
 	}
 
