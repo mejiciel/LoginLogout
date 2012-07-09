@@ -3,19 +3,21 @@ package com.meji.UserManager;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import com.meji.UserManagement.UserManager;
+import com.meji.UserManagement.UserProfile;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class UserManageAction extends ActionSupport implements ModelDriven<User> {
-	private User user=new User();
-	private static Hashtable<String,User> existingUser=new Hashtable<String,User>();
+public class UserManageAction extends ActionSupport implements ModelDriven<UserProfile> {
+	private UserProfile user=new UserProfile();
+	
 	
 	private String resultMessage;
-	public User getUser() {
+	public UserProfile getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserProfile user) {
 		this.user = user;
 	}
 
@@ -30,10 +32,10 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		return "result";
 	}
 	public String createuser() throws Exception{
-		if(!existingUser.containsKey(user.getName()))
+		UserManager umgr=new UserManager();
+		if(!umgr.CheckUserExistByName(user.getName()))
 		{
-			User t=(User) user.clone();
-			existingUser.put(t.getName(),t);
+			umgr.CreateUser(user);
 			setResultMessage(user.getName()+" "+user.getPassword()+" "+user.getEmail());
 			return super.execute();
 		}
@@ -46,8 +48,8 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	}
 	
 	public String Login() throws Exception{
-		if(existingUser.containsKey(user.getName()) &&
-				user.getPassword().equals(existingUser.get(user.getName()).getPassword()))
+		UserManager umgr=new UserManager();
+		if(umgr.ValidateUser(user))
 		{
 			
 			setResultMessage("Login Success");
@@ -61,17 +63,12 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	
 	public String Forget() throws Exception{
 		
-		Enumeration<User> userEnum=existingUser.elements();
-		while(userEnum.hasMoreElements())
+		UserManager umgr=new UserManager();
+		if(umgr.CheckUserExistByEmail(user.getEmail()))
 		{
-			User t=userEnum.nextElement();
-			if(t.getEmail().equals(user.getEmail()))
-			{
-				setResultMessage("Your password is "+t.getPassword());
-				return "result";
-			}
-				
-				
+			
+			setResultMessage("Your password is "+umgr.GetPasswordByEmail(user.getEmail()));
+			return "result";
 		}
 		
 		setResultMessage("Your email is not registered.");
@@ -87,7 +84,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	}
 
 	@Override
-	public User getModel() {
+	public UserProfile getModel() {
 		// TODO Auto-generated method stub
 		return user;
 	}

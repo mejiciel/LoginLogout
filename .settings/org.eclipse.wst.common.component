@@ -2,6 +2,7 @@
     <wb-module deploy-name="LoginLogout">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/UserDataBase"/>
         <property name="context-root" value="LoginLogout"/>
         <property name="java-output-path" value="/LoginLogout/build/classes"/>
     </wb-module>
