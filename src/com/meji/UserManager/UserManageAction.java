@@ -58,6 +58,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<UserP
 		if(umgr.ValidateUser(user))
 		{
 			ServletActionContext.getContext().getSession().put("login", true);
+			ServletActionContext.getContext().getSession().put("currentuser", user);
 			setResultMessage("Login Success");
 			return "home";
 		}
@@ -67,9 +68,11 @@ public class UserManageAction extends ActionSupport implements ModelDriven<UserP
 		
 	}
 	public String Logout() throws Exception{
-		if((boolean)ServletActionContext.getContext().getSession().get("login")==true)
+		Object o=ServletActionContext.getContext().getSession().get("login");
+		if(o!=null && (boolean)o==true)
 		{
 			ServletActionContext.getContext().getSession().remove("login");
+			ServletActionContext.getContext().getSession().remove("currentuser");
 			setResultMessage("Logged out");
 		}
 		else

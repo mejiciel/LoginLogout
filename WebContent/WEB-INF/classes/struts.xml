@@ -11,6 +11,7 @@
 	<result name="login">result.jsp</result>
 	<result name="result">result.jsp</result>
 	<result name="forget">result.jsp</result>
+	<result name="home">MyHome.jsp</result>
 	</action>
 	
 	<action name="CreateUser" method="createuser" class="com.meji.UserManager.UserManageAction">
