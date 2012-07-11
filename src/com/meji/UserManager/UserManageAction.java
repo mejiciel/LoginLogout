@@ -3,6 +3,8 @@ package com.meji.UserManager;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.meji.UserManagement.UserManager;
 import com.meji.UserManagement.UserProfile;
 import com.opensymphony.xwork2.ActionSupport;
@@ -11,7 +13,11 @@ import com.opensymphony.xwork2.ModelDriven;
 public class UserManageAction extends ActionSupport implements ModelDriven<UserProfile> {
 	private UserProfile user=new UserProfile();
 	
-	
+	private UserProfile currentUser;
+	public UserProfile getCurrentUser() {
+		return currentUser;
+	}
+
 	private String resultMessage;
 	public UserProfile getUser() {
 		return user;
@@ -51,14 +57,26 @@ public class UserManageAction extends ActionSupport implements ModelDriven<UserP
 		UserManager umgr=new UserManager();
 		if(umgr.ValidateUser(user))
 		{
-			
+			ServletActionContext.getContext().getSession().put("login", true);
 			setResultMessage("Login Success");
-				
+			return "home";
 		}
 		else
 			setResultMessage("Login Failed");
 		return "result";
 		
+	}
+	public String Logout() throws Exception{
+		if((boolean)ServletActionContext.getContext().getSession().get("login")==true)
+		{
+			ServletActionContext.getContext().getSession().remove("login");
+			setResultMessage("Logged out");
+		}
+		else
+		{
+			setResultMessage("Not Logged in");
+		}
+		return "result";
 	}
 	
 	public String Forget() throws Exception{
