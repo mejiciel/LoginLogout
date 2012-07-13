@@ -20,7 +20,7 @@ function validatePassword()
 </head>
 <body>
 
-<s:form validate="true" action="CreateUser.action" method="POST"  >
+<s:form validate="true" action="CreateUser.action" method="POST" namespace="/RegPages"  >
 <s:textfield name="name" label="Name" />
 <s:textfield name="email" label="Email"/>
 <s:password name="password" label="Password" id="password" /><img id="validateicon" src="image/check.gif"/>

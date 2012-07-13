@@ -10,5 +10,6 @@
 <body>
 
 Hello <s:property value="#session.currentuser.name"/> 
+<s:a action="UserLogout" >Logout</s:a>
 </body>
 </html>

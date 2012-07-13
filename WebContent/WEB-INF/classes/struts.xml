@@ -6,7 +6,7 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
-	<package name="UserManager" extends="struts-default">
+	<package name="UserManager" extends="struts-default" namespace="/RegPages">
 	<action name="User*" method="{1}" class="com.meji.UserManager.UserManageAction" >
 	<result name="login">result.jsp</result>
 	<result name="result">result.jsp</result>

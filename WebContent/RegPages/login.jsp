@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<s:form action="UserLogin" cssStyle="width:400px" >
+<s:form action="UserLogin" cssStyle="width:400px" namespace="/RegPages" >
 <s:textfield  name="user.name"  label="Name" />
 
 <s:password name="user.password" label="Password"/>

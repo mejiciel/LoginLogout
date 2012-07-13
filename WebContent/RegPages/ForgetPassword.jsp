@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<s:form action="UserForget">
+<s:form action="UserForget" namespace="RegPages">
 <s:textfield name="email" label="Registered Email" />
 <s:submit value="Recover"/>
 </s:form>
