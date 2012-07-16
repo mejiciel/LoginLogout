@@ -5,6 +5,7 @@ import java.util.Hashtable;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.meji.UserManagement.UserDBManger;
 import com.meji.UserManagement.UserManager;
 import com.meji.UserManagement.UserProfile;
 import com.opensymphony.xwork2.ActionSupport;
@@ -38,7 +39,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<UserP
 		return "result";
 	}
 	public String createuser() throws Exception{
-		UserManager umgr=new UserManager();
+		UserDBManger umgr=new UserManager();
 		if(!umgr.CheckUserExistByName(user.getName()))
 		{
 			umgr.CreateUser(user);
@@ -54,7 +55,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<UserP
 	}
 	
 	public String Login() throws Exception{
-		UserManager umgr=new UserManager();
+		UserDBManger umgr=new UserManager();
 		if(umgr.ValidateUser(user))
 		{
 			ServletActionContext.getContext().getSession().put("login", true);
@@ -84,7 +85,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<UserP
 	
 	public String Forget() throws Exception{
 		
-		UserManager umgr=new UserManager();
+		UserDBManger umgr=new UserManager();
 		if(umgr.CheckUserExistByEmail(user.getEmail()))
 		{
 			
